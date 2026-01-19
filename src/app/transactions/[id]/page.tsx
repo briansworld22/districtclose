@@ -13,6 +13,7 @@ import { Badge } from '@/components/ui/badge';
 import { Alert } from '@/components/ui/alert';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { formatCurrency } from '@/utils/dc-taxes';
+import { ChatWidget } from '@/components/ai/chat-widget';
 import type { Transaction, Milestone, Document, UserRole } from '@/types/database';
 
 interface PageProps {
@@ -209,6 +210,17 @@ export default async function TransactionDetailPage({ params }: PageProps) {
           </div>
         </div>
       </main>
+
+      {/* AI Chat Widget with transaction context */}
+      <ChatWidget
+        context={{
+          userRole,
+          propertyAddress: typedTransaction.property_address,
+          salePrice: typedTransaction.sale_price,
+          isTenanted: typedTransaction.is_tenanted,
+          currentPage: 'transaction-detail',
+        }}
+      />
     </div>
   );
 }
